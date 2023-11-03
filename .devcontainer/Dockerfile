@@ -16,3 +16,10 @@ COPY Makefile /tmp/
 RUN su $USER -c "/usr/bin/python3 -m venv /home/${USER}/venv" \
    && su $USER -c "${VENV_PATH}/bin/pip --disable-pip-version-check --no-cache-dir install -r /tmp/requirements.txt" \
    && rm -rf /tmp/requirements.txt 
+
+# Hadoop 설치
+RUN apt-get update && apt-get -y install wget 
+RUN wget <Hadoop download URL> && \
+    tar -xzvf hadoop-x.y.z.tar.gz && \
+    mv hadoop-x.y.z /opt/hadoop
+ENV LD_LIBRARY_PATH=${LD_LIBRARY_PATH}:/opt/hadoop/lib/native

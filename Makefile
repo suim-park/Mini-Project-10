@@ -15,3 +15,9 @@ deploy:
 	# deploy goes here
 		
 all: install lint test format
+
+activate:
+	source /home/codespace/venv/bin/activate
+
+setup:
+    bash setup.sh
