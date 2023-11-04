@@ -6,7 +6,7 @@ format:
 	black *.py && black test_*.py
 
 lint:
-	ruff check test_*.py *.py
+	pylint --disable=R,C --ignore-patterns=test_*.py *.py
 
 test:
 	python -m pytest -vv --cov=main test_*.py *.py
@@ -15,9 +15,3 @@ deploy:
 	# deploy goes here
 		
 all: install lint test format
-
-activate:
-	source /home/codespace/venv/bin/activate
-
-setup:
-    bash setup.sh
