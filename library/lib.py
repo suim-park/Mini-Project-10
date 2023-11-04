@@ -26,7 +26,7 @@ def spark_sql_query(spark: SparkSession, data: DataFrame):
     result.show()
     return result
 
-def add_bill_length_category(spark: SparkSession, data: DataFrame) -> DataFrame:
+def transform(spark: SparkSession, data: DataFrame) -> DataFrame:
     # bill_length_mm 컬럼을 기준으로 bill_length_category 컬럼 추가
     conditions = [
         (F.col("bill_length_mm") < 40, "Short"),

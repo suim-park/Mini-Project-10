@@ -1,4 +1,4 @@
-from library.lib import init_spark, read_csv, spark_sql_query, add_bill_length_category
+from library.lib import init_spark, read_csv, spark_sql_query, transform
 
 
 if __name__ == "__main__":
@@ -16,6 +16,6 @@ if __name__ == "__main__":
     spark_sql_query(spark, df)
 
     # bill_length_category 추가한 데이터 출력
-    df_with_category = add_bill_length_category(spark, df)
+    df_with_category = transform(spark, df)
     print("Data After Adding Bill Length Category:")
     df_with_category.show()

@@ -1,4 +1,4 @@
-from library.lib import init_spark, read_csv, spark_sql_query, add_bill_length_category
+from library.lib import init_spark, read_csv, spark_sql_query, transform
 from pyspark.sql import SparkSession, Row
 
 
@@ -37,7 +37,7 @@ def test_spark_sql_query():
     print("Test spark sql query passed successfully.")
 
 
-def test_add_bill_length_category():
+def test_transform():
     # 테스트를 위한 SparkSession 생성
     spark = SparkSession.builder.appName("Add Bill Length Category Test").getOrCreate()
 
@@ -50,7 +50,7 @@ def test_add_bill_length_category():
     df = spark.createDataFrame(sample_data)
 
     # add_bill_length_category 함수 호출
-    result_df = add_bill_length_category(spark, df)
+    result_df = transform(spark, df)
 
     # 결과 DataFrame에서 bill_length_category 컬럼의 값 검증
     categories = [row["bill_length_category"] for row in result_df.collect()]
@@ -58,7 +58,7 @@ def test_add_bill_length_category():
 
     assert categories == expected_categories, "Test failed!"
 
-    print("Test add bill length category passed successfully.")
+    print("Test transform passed successfully.")
 
     # 테스트 후 SparkSession 종료
     spark.stop()
@@ -68,4 +68,4 @@ if __name__ == "__main__":
     test_init_spark()
     test_read_csv()
     test_spark_sql_query()
-    test_add_bill_length_category()
+    test_transform()
